@@ -18,6 +18,7 @@ public class LoginTest {
 
         options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
