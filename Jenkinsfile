@@ -61,7 +61,7 @@ pipeline {
             post {
                 always {
                     junit 'target/surefire-reports/junitreports/*.xml'
-                    jiraSendBuildInfo
+
                 }
             }
         }
