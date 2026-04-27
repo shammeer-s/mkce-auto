@@ -24,6 +24,7 @@ public class LoginTest {
     public void verifyApplicationLaunch() {
         driver.get("https://the-internet.herokuapp.com/");
         System.out.println(driver.getTitle());
+
         String pageTitle = driver.getTitle();
         Assert.assertTrue(pageTitle.contains("The Internet"), "Title mismatch. Current title: " + pageTitle);
     }
