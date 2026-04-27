@@ -55,6 +55,7 @@ pipeline {
             post {
                 always {
                     junit 'target/surefire-reports/junitreports/*.xml'
+                    jiraSendBuildInfo site: 'shammeer.atlassian.net'
                 }
             }
         }
