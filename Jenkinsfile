@@ -6,6 +6,11 @@ pipeline {
         jdk 'JDK17'
     }
 
+    environment {
+        JAVA_HOME = tool('JDK17')
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -15,13 +20,25 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh 'mvn clean compile'
+                script {
+                    def javaHome = tool name: 'JDK17', type: 'jdk'
+                    def mvnHome = tool name: 'Maven3', type: 'maven'
+                    withEnv(["JAVA_HOME=${javaHome}", "PATH=${mvnHome}/bin:${javaHome}/bin:${env.PATH}"]) {
+                        sh 'mvn clean compile'
+                    }
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    def javaHome = tool name: 'JDK17', type: 'jdk'
+                    def mvnHome = tool name: 'Maven3', type: 'maven'
+                    withEnv(["JAVA_HOME=${javaHome}", "PATH=${mvnHome}/bin:${javaHome}/bin:${env.PATH}"]) {
+                        sh 'mvn test'
+                    }
+                }
             }
             post {
                 always {
