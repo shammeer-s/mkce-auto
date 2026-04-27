@@ -8,14 +8,18 @@ pipeline {
 
     stages {
         stage('Checkout') {
+
             steps {
+            jiraSendBuildInfo site: 'shammeer.atlassian.net'
                 checkout scm
             }
         }
 
         stage('Compile') {
             steps {
+            jiraSendBuildInfo site: 'shammeer.atlassian.net'
                 script {
+
                     def javaDir = tool name: 'JDK17', type: 'jdk'
                     def mvnDir = tool name: 'Maven3', type: 'maven'
 
@@ -36,6 +40,8 @@ pipeline {
 
         stage('Test') {
             steps {
+
+                jiraSendBuildInfo site: 'shammeer.atlassian.net'
                 script {
                     def javaDir = tool name: 'JDK17', type: 'jdk'
                     def mvnDir = tool name: 'Maven3', type: 'maven'
